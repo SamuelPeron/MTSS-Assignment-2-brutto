@@ -37,4 +37,9 @@ public class EItem {
     public String getName() {
         return name;
     }
+
+    public void discount(double d) {
+
+        this.price *= (1 - d);
+    }
 }
