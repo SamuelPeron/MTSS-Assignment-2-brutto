@@ -27,7 +27,7 @@ public class BillImplementationTest {
     @Before
     public void setUp() throws Exception {
         bill = new BillImplementation();
-        user = new User("Mattia", "Brunello", LocalDate.of(2001, 12, 21),"mattia@email.com");
+        user = new User("Mattia", "Brunello", LocalDate.of(2001, 12, 21), "mattia@email.com");
         itemsOrdered = new ArrayList<EItem>();
     }
 
@@ -42,5 +42,15 @@ public class BillImplementationTest {
         itemsOrdered.add(motheboard);
         itemsOrdered.add(keyboard);
         assertEquals(110.0, bill.getOrderPrice(itemsOrdered, user), 1e-15);
+    }
+
+    @Test
+    public void testProcessorDiscount() throws BillException {
+
+        for (int i = 0; i < 10; i++) {
+            itemsOrdered.add(new EItem(itemType.PROCESSOR, 10, "processor"));
+        }
+
+        assertEquals(95.0, bill.getOrderPrice(itemsOrdered, user), 1e-15);
     }
 }
